@@ -1,0 +1,71 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  background-color: #f4f0e9; /* El color de fondo claro que se ve en tus imágenes */
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #333; /* Un color oscuro para el texto del título */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 450px; /* Ancho del formulario para acomodar label y input al lado */
+  margin-bottom: 40px; /* Espacio debajo del formulario, separándolo del texto de registro */
+  padding: 30px; /* Un poco más de padding dentro del formulario para espacio */
+  background-color: #ffffff; /* Fondo blanco para el formulario si lo deseas, o dejarlo transparente si el fondo del container es suficiente */
+  border-radius: 8px; /* Bordes ligeramente redondeados para el formulario */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra sutil para darle profundidad al formulario */
+}
+
+/* Estilo para los grupos de label e input (Email y Password) */
+.form-group {
+  display: flex; /* Para que label e input estén en la misma línea */
+  align-items: center; /* Centra verticalmente los elementos */
+  margin-bottom: 25px; /* Espacio entre el grupo de Email y el de Password */
+}
+
+label {
+  font-size: 1.2rem;
+  width: 120px; /* Ancho fijo para las etiquetas, ajusta si necesitas más espacio */
+  text-align: right; /* Alinea el texto de la etiqueta a la derecha */
+  margin-right: 20px; /* Espacio entre el label y el input */
+  color: #333; /* Color oscuro para el texto del label */
+}
+
+input {
+  padding: 14px 10px; /* Un poco más de padding interno para los campos de entrada */
+  font-size: 1rem;
+  background-color: #f5c66a; /* Color de fondo del input como en tus imágenes */
+  border: none; /* Elimina el borde predeterminado */
+  flex-grow: 1; /* Permite que el input ocupe el espacio restante */
+  border-radius: 5px; /* Ligeramente redondeado */
+  outline: none; /* Elimina el contorno azul al hacer foco */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra interna sutil para el input */
+}
+
+input:focus {
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0 0 0 2px #e78d4b; /* Resalta el input al enfocar con un borde naranja */
+}
+
+button {
+  padding: 12px 25px; /* Padding para el botón */
+  background-color: #e78d4b; /* Color del botón de Login */
+  color: white; /* Color del texto del botón */
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 5px; /* Bordes redondeados para el botón */
+  margin-top: 30px; /* Espacio encima del botón de Login */
+  width: 100%; /* El botón ocupa el ancho del formulario */
+}

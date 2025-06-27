@@ -1,0 +1,77 @@
+.restaurant-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding: 60px 20px;
+  min-height: 100vh;
+  background-color: #f4f0e9;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+label {
+  width: 130px;
+  font-weight: bold;
+  margin-right: 15px;
+  color: #333;
+  text-align: right;
+}
+
+input {
+  flex-grow: 1;
+  padding: 12px;
+  background-color: #f5c66a;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #e78d4b;
+}
+
+button {
+  padding: 12px;
+  background-color: #e78d4b;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 25px;
+  font-size: 1.2rem;
+}
+
+button:hover {
+  background-color: #cf7838;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

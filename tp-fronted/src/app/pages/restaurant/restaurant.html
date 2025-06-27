@@ -1,0 +1,41 @@
+<div class="restaurant-container">
+    <h1>Restaurant</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Street</th>
+                <th>Number</th>
+                <th>City</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let restaurant of restaurants; let i = index" [class.selected]="selectedRow === i"
+                (click)="selectRow(i)">
+                <td>{{ restaurant.id }}</td>
+                <td>{{ restaurant.name }}</td>
+                <td>{{ restaurant.street }}</td>
+                <td>{{ restaurant.number }}</td>
+                <td>{{ restaurant.cityId }}</td>
+                <td>{{ restaurant.lat }}</td>
+                <td>{{ restaurant.long }}</td>
+                <td>
+                    <img [src]="restaurant.imageUrl" alt="Restaurant image" class="thumbnail" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="button-group">
+        <button (click)="onNew()">New</button>
+        <button (click)="onEdit()">Edit</button>
+        <button (click)="onDelete()">Delete</button>
+        <button (click)="onView()">View</button>
+        <button (click)="onNext()">Next</button>
+    </div>
+</div>

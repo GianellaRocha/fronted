@@ -1,0 +1,93 @@
+.restaurant-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f0e9;
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    padding: 50px 20px;
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+/* Tabla */
+table {
+    border-collapse: collapse;
+    width: 90%;
+    max-width: 1200px;
+    margin-bottom: 50px;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 16px 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+thead th {
+    background-color: #e78d4b;
+    color: white;
+    font-weight: bold;
+}
+
+/* Hover & selected row */
+tbody tr:hover {
+    background-color: #fff1d6;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: #f5c66a !important;
+}
+
+/* Botones */
+.button-group {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+button {
+    padding: 12px 25px;
+    background-color: #e78d4b;
+    color: white;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    min-width: 100px;
+}
+
+button:hover {
+    background-color: #cf7838;
+}
+
+.next-btn {
+    background-color: #f7d654;
+    color: black;
+}
+
+.next-btn:hover {
+    background-color: #eec738;
+}
+
+.thumbnail {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+}

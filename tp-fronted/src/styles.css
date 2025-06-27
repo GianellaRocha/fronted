@@ -1,0 +1,5 @@
+/* You can add global styles to this file, and also import other style files */
+/* fondo de color de pantalla, tipo de boton, letra y color de fondo de boton */
+body {
+    background-color: #f5efe6; /* Usando un nombre de color */
+}
