@@ -65,6 +65,12 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('access_token');
   }
+  //para autenticar si el usuario tine un token
+
+  
+isAuthenticated(): boolean {
+  return !!localStorage.getItem('access_token');
+}
 
   // Este método isLoggedIn() está duplicado y generaba el error.
   // Lo he renombrado arriba a getIsLoggedInObservable() para el BehaviorSubject

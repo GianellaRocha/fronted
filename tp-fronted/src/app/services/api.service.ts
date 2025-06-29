@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import axios from 'axios';
+import axiosService from '../api/axiosClient'; // ✅ Importa tu cliente Axios con token
 import { config } from '../config/env';
 
 @Injectable({
@@ -11,6 +11,44 @@ export class ApiService {
   async getData(): Promise<
     Array<{ name: string; description: string; image: string }>
   > {
-     return (await axios.get(config.urls.getFood)).data
+    return (await axiosService.get(config.urls.getFood)).data; // ✅ usamos axiosService
+  }
+
+  async getRestaurants(): Promise<
+    Array<{
+      id: number;
+      name: string;
+      street: string;
+      number: number;
+      cityId: number;
+      lat: number;
+      long: number;
+      imageUrl: string;
+    }>
+  > {
+    const datos = (await axiosService.get(config.urls.getRestaurants)).data; // ✅ usamos axiosService
+    const respuesta = datos.map(
+      (item: {
+        id: any;
+        name: any;
+        address: {
+          street: any;
+          number: any;
+          cityId: any;
+          location: { lat: any; lng: any };
+        };
+        imageUrl: any;
+      }) => ({
+        id: item.id,
+        name: item.name,
+        street: item.address.street,
+        number: item.address.number,
+        cityId: item.address.cityId,
+        lat: item.address.location.lat,
+        lng: item.address.location.lng, // Ojo: cambiaste de `long` a `lng` (corregido)
+        imageUrl: item.imageUrl,
+      })
+    );
+    return respuesta;
   }
 }

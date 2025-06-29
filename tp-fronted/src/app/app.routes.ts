@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { TemplateComponent } from './pages/template/template.component';
 import { HomeComponent } from './pages/home/home.component';
+import { canActivateFn } from './guard/auth.guard';
 
 export const routes: Routes = [
     {
@@ -10,6 +11,7 @@ export const routes: Routes = [
             {
                 path: '',
                 component: HomeComponent,
+                canActivate: [canActivateFn], // Protege la ruta raíz
             },
         ],
     },
@@ -23,15 +25,18 @@ export const routes: Routes = [
     },
     {
         path: 'restaurant',
-        loadComponent: () => import('./pages/restaurant/restaurant').then(m => m.Restaurant)
+        loadComponent: () => import('./pages/restaurant/restaurant').then(m => m.Restaurant),
+        canActivate: [canActivateFn]
     },
     {
         path: 'restaurant/new',
-        loadComponent: () => import('./pages/new-restaurant/new-restaurant').then(m => m.NewComponent)
+        loadComponent: () => import('./pages/new-restaurant/new-restaurant').then(m => m.NewComponent),
+        canActivate: [canActivateFn]
     },
     {
         path: 'restaurant/edit/:id',
-        loadComponent: () => import('./pages/edit-restaurant/edit-restaurant').then(m => m.EditComponent)
+        loadComponent: () => import('./pages/edit-restaurant/edit-restaurant').then(m => m.EditComponent),
+        canActivate: [canActivateFn]
     }
 ];
 //definir rutas de la aplicacion

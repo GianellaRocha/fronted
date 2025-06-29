@@ -26,7 +26,7 @@ export class LoginComponent {
   onLogin() {
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: () => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/restaurant']);
       },
       error: (err: HttpErrorResponse) => {
         this.error = 'Login fallido. Verifica tus credenciales.';
