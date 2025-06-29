@@ -15,25 +15,22 @@
       </tr>
     </thead>
     <tbody>
-      @for (let restaurant of restaurants; let i = index) {
-      <tr [class.selected]="selectedRow === i" (click)="selectRow(i)">
-        <td>{{ restaurant.id }}</td>
-        <td>{{ restaurant.name }}</td>
-        <td>{{ restaurant.street }}</td>
-        <td>{{ restaurant.number }}</td>
-        <td>{{ restaurant.cityId }}</td>
-        <td>{{ restaurant.lat }}</td>
-        <td>{{ restaurant.long }}</td>
-        <td>
-          <img
-            [src]="restaurant.imageUrl"
-            alt="Restaurant image"
-            class="thumbnail"
-          />
-        </td>
-      </tr>
-    }
-    </tbody>
+  @for (restaurant of restaurants; track restaurant.id) {
+    <tr [class.selected]="selectedRow === restaurants.indexOf(restaurant)" (click)="selectRow(restaurants.indexOf(restaurant))">
+      <td>{{ restaurant.id }}</td>
+      <td>{{ restaurant.name }}</td>
+      <td>{{ restaurant.street }}</td>
+      <td>{{ restaurant.number }}</td>
+      <td>{{ restaurant.cityId }}</td>
+      <td>{{ restaurant.lat }}</td>
+      <td>{{ restaurant.long }}</td>
+      <td>
+        <img [src]="restaurant.imageUrl" alt="Restaurant image" class="thumbnail" />
+      </td>
+    </tr>
+  }
+</tbody>
+
   </table>
 
   <div class="button-group">

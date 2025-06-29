@@ -35,7 +35,7 @@ export class AuthService {
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.loginURL}/login`, credentials).pipe(
       tap((response: any) => {
-        const token = response.access_token;
+        const token = response.accessToken;
         if (token) {
           localStorage.setItem('access_token', token);
           this.loggedIn.next(true); // Actualiza el BehaviorSubject

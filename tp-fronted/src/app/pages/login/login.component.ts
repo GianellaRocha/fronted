@@ -24,13 +24,14 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onLogin() {
+    this.error = null;
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: () => {
         this.router.navigate(['/restaurant']);
       },
       error: (err: HttpErrorResponse) => {
         this.error = 'Login fallido. Verifica tus credenciales.';
-        console.error(err);
+        console.error(this.error, err);
       }
     });
   }

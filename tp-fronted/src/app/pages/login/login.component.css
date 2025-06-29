@@ -95,3 +95,11 @@ button:hover {
 .create-account-link:hover {
     color: #cf7838;
 }
+
+.error-message {
+  color: red;
+  font-size: 1rem;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+}
