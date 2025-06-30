@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { config } from 'app/config/env';
 import { ApiService } from 'app/services/api.service';
 import { GlobalStatusService } from 'app/services/global-status.service';
 
@@ -50,12 +51,12 @@ export class Restaurant {
   }
 
   onEdit() {
-    // if (this.selectedRow === null) {
-    //   alert('Seleccioná un restaurante primero.');
-    //   return;
-    // }
-    // const selectedRestaurant = this.restaurants[this.selectedRow];
-    // this.router.navigate(['/restaurants/edit/:id', selectedRestaurant.id]);
+    if (this.selectedRow === null) {
+      alert('Seleccioná un restaurante primero.');
+      return;
+    }
+    const selectedRestaurant = this.restaurants[this.selectedRow];
+    this.router.navigate(['/restaurant/edit', selectedRestaurant.id]);
   }
 
   onDelete() {

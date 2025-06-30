@@ -26,7 +26,7 @@ export class ApiService {
       imageUrl: string;
     }>
   > {
-    const datos = (await axiosService.get(config.urls.getRestaurants)).data; // ✅ usamos axiosService
+    const datos = (await axiosService.get(config.urls.getRestaurants)).data; // usamos axiosService
     const respuesta = datos.map(
       (item: {
         id: any;
@@ -45,10 +45,34 @@ export class ApiService {
         number: item.address.number,
         cityId: item.address.cityId,
         lat: item.address.location.lat,
-        lng: item.address.location.lng, // Ojo: cambiaste de `long` a `lng` (corregido)
+        long: item.address.location.lng, // Ojo: cambiaste de `long` a `lng` (corregido)
         imageUrl: item.imageUrl,
       })
     );
     return respuesta;
+  }
+
+  async getRestaurantById(id: number): Promise<{
+    id: number;
+    name: string;
+    street: string;
+    number: number;
+    cityId: number;
+    lat: number;
+    long: number;
+    imageUrl: string;
+  }> {
+    const datos = (await axiosService.get(`${config.urls.getRestaurants}/${id}`))
+      .data; // usamos axiosService
+    return {
+      id: datos.id,
+      name: datos.name,
+      street: datos.address.street,
+      number: datos.address.number,
+      cityId: datos.address.cityId,
+      lat: datos.address.location.lat,
+      long: datos.address.location.lng,
+      imageUrl: datos.imageUrl,
+    };
   }
 }

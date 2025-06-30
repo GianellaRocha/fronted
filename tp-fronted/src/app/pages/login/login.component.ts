@@ -19,19 +19,16 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class LoginComponent {
   email: string = '';
   password: string = '';
-  error: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onLogin() {
-    this.error = null;
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: () => {
         this.router.navigate(['/restaurant']);
       },
       error: (err: HttpErrorResponse) => {
-        this.error = 'Login fallido. Verifica tus credenciales.';
-        console.error(this.error, err);
+        alert('Login fallido. Verifica tus credenciales.');
       }
     });
   }

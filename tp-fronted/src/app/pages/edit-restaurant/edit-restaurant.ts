@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from 'app/services/api.service';
 
 @Component({
   selector: 'app-edit-restaurant',
@@ -14,25 +15,25 @@ export class EditComponent implements OnInit {
   restaurant: any;
   originalRestaurant: any;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
     const restaurantId = this.route.snapshot.paramMap.get('id');
+    this.initialization(restaurantId);
+  }
 
-    // ⚠️ Simulación: en un proyecto real, obtendrías los datos desde un servicio
-    const fetched = {
-      id: restaurantId,
-      name: 'Pizza Place',
-      street: 'Main St',
-      number: 123,
-      cityId: 5,
-      lat: -34.6,
-      long: -58.4,
-      imageUrl: 'assets/images/pizza.jpg'
-    };
-
-    this.restaurant = { ...fetched };
-    this.originalRestaurant = { ...fetched }; // para comparar luego
+  async initialization(restaurantId: string | null): Promise<void> {
+    if (!restaurantId) {
+      alert('No se proporcionó un ID de restaurante válido.');
+      return;
+    }
+    try {
+      const fetched = await this.apiService.getRestaurantById(+restaurantId);
+      this.restaurant = { ...fetched };
+      this.originalRestaurant = { ...fetched }; // Guardamos el original para comparación
+    } catch (error) {
+      alert('Error al obtener el restaurante:');
+    }
   }
 
   onSave() {
@@ -41,13 +42,15 @@ export class EditComponent implements OnInit {
     );
 
     if (modifiedKeys.length === 0) {
-      console.log('No se cambió ningún dato.');
+      alert('No se cambió ningún dato.');
     } else if (modifiedKeys.length === Object.keys(this.restaurant).length) {
-      console.log('Se cambiaron todos los campos. → Usar PUT');
+      alert('Se cambiaron todos los campos. → Usar PUT');
+      // Aquí podrías llamar a un método para hacer PUT
     } else {
-      console.log('Se cambiaron algunos campos. → Usar PATCH');
+      alert('Se cambiaron algunos campos. → Usar PATCH');
+      // Aquí podrías llamar a un método para hacer PATCH
     }
 
-    this.router.navigate(['/restaurants']);
+    this.router.navigate(['/restaurant']);
   }
 }

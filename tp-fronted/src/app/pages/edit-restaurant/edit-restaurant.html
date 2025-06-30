@@ -1,6 +1,6 @@
 <div class="restaurant-form-container">
   <h1>Edit Restaurant</h1>
-
+  @if (restaurant) {
   <form (ngSubmit)="onSave()">
     <div class="form-group">
       <label for="id">ID</label>
@@ -44,4 +44,5 @@
 
     <button type="submit">Save and Exit</button>
   </form>
+  } 
 </div>
