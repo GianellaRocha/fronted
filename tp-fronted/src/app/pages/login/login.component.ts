@@ -3,7 +3,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from 'app/config/services/auth.service';
+import { AuthService } from 'app/services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
 

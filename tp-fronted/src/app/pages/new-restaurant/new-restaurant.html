@@ -1,42 +1,68 @@
 <div class="restaurant-form-container">
   <h1>New Restaurant</h1>
 
-  <form (ngSubmit)="onSave()">
+  <form [formGroup]="formulario" (ngSubmit)="onSave()">
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
     <div class="form-group">
       <label for="name">Name</label>
-      <input id="name" [(ngModel)]="restaurant.name" name="name" required />
+      <input id="name" formControlName="name" />
+      <div *ngIf="formulario.get('name')?.invalid && formulario.get('name')?.touched">
+        <small class="text-danger">Nombre requerido (mínimo 6 letras)</small>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="street">Street</label>
-      <input id="street" [(ngModel)]="restaurant.street" name="street" required />
+      <input id="street" formControlName="street" />
+      <div *ngIf="formulario.get('street')?.invalid && formulario.get('street')?.touched">
+        <small class="text-danger">Calle requerida (mínimo 6 letras)</small>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="number">Number</label>
-      <input id="number" type="number" [(ngModel)]="restaurant.number" name="number" required />
+      <input id="number" type="number" formControlName="number" />
+      <div *ngIf="formulario.get('number')?.invalid && formulario.get('number')?.touched">
+        <small class="text-danger" *ngIf="formulario.get('number')?.errors?.['required']">Número requerido</small>
+        <small class="text-danger" *ngIf="formulario.get('number')?.errors?.['min']">Debe ser mayor que 0</small>
+        <small class="text-danger" *ngIf="formulario.get('number')?.errors?.['max']">Máximo permitido: 3</small>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="cityId">City ID</label>
-      <input id="cityId" type="number" [(ngModel)]="restaurant.cityId" name="cityId" required />
+      <input id="cityId" type="number" formControlName="cityId" />
+      <div *ngIf="formulario.get('cityId')?.invalid && formulario.get('cityId')?.touched">
+        <small class="text-danger">City ID es requerido y debe ser mayor a 0</small>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="lat">Latitude</label>
-      <input id="lat" type="number" step="any" [(ngModel)]="restaurant.lat" name="lat" required />
+      <input id="lat" type="number" step="any" formControlName="lat" />
+      <div *ngIf="formulario.get('lat')?.invalid && formulario.get('lat')?.touched">
+        <small class="text-danger">Latitud entre -90 y 90</small>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="long">Longitude</label>
-      <input id="long" type="number" step="any" [(ngModel)]="restaurant.long" name="long" required />
+      <input id="long" type="number" step="any" formControlName="long" />
+      <div *ngIf="formulario.get('long')?.invalid && formulario.get('long')?.touched">
+        <small class="text-danger">Longitud entre -180 y 180</small>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="imageUrl">Image URL</label>
-      <input id="imageUrl" [(ngModel)]="restaurant.imageUrl" name="imageUrl" />
+      <input id="imageUrl" formControlName="imageUrl" />
+      <div *ngIf="formulario.get('imageUrl')?.invalid && formulario.get('imageUrl')?.touched">
+        <small class="text-danger" *ngIf="formulario.get('imageUrl')?.errors?.['required']">URL de imagen requerida</small>
+        <small class="text-danger" *ngIf="formulario.get('imageUrl')?.errors?.['pattern']">Debe ser una URL válida que termine en .jpg, .png, etc.</small>
+      </div>
     </div>
 
-    <button type="submit">Save and Exit</button>
+    <button type="submit" [disabled]="formulario.invalid">Save and Exit</button>
   </form>
 </div>

@@ -4,7 +4,7 @@
   <form (ngSubmit)="onSave()">
     <div class="form-group">
       <label for="id">ID</label>
-      <input id="id" [value]="restaurant.id" disabled />
+      <input id="id" [(ngModel)]="restaurant.id" name="id" readonly />
     </div>
 
     <div class="form-group">
@@ -44,5 +44,5 @@
 
     <button type="submit">Save and Exit</button>
   </form>
-  } 
+  }
 </div>

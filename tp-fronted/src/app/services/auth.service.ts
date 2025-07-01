@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators'; // Operadores de RxJS están en 'rxjs/operators'
 import { Observable, BehaviorSubject } from 'rxjs'; // <-- ¡Añade BehaviorSubject aquí!
 import { Router } from '@angular/router'; // <-- ¡Añade Router aquí!
+import { RegisterResponse } from './interface';
 
 @Injectable({
   providedIn: 'root'
@@ -44,13 +45,11 @@ export class AuthService {
     );
   }
 
-  register(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.loginURL}/register`, credentials).pipe(
-      tap((response: any) => {
-        const token = response.access_token;
-        if (token) {
-          localStorage.setItem('access_token', token);
-          this.loggedIn.next(true); // Actualiza el BehaviorSubject
+ register(credentials: { email: string; password: string }): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(`${this.loginURL}/register`, credentials).pipe(
+      tap((response) => {
+        if (response.access_token) {
+          this.loggedIn.next(true); // Sólo actualiza el estado
         }
       })
     );
