@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { TemplateComponent } from './pages/template/template.component';
 import { HomeComponent } from './pages/home/home.component';
 import { canActivateFn } from './guard/auth.guard';
+import { Restaurant } from './pages/restaurant/restaurant';
 
 export const routes: Routes = [
     {
@@ -10,10 +11,14 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                component: HomeComponent,
+                component: Restaurant,
                 canActivate: [canActivateFn], // Protege la ruta raíz
             },
         ],
+    },
+    {
+        path: 'gome',
+        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
     },
     {
         path: 'login',

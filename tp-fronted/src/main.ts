@@ -9,6 +9,6 @@ import { provideHttpClient } from '@angular/common/http';
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
-    provideHttpClient() // ⬅️ ESTO SOLUCIONA EL ERROR
+    provideHttpClient() // ESTO SOLUCIONA EL ERROR
   ]
 });

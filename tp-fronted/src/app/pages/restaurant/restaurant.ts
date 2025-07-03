@@ -16,7 +16,7 @@ export class Restaurant {
     private router: Router,
     private readonly apiService: ApiService,
     private readonly globalStatusService: GlobalStatusService
-  ) {}
+  ) { }
 
   restaurants: Array<{
     id: number;
@@ -37,9 +37,15 @@ export class Restaurant {
 
   async initialization(): Promise<void> {
     this.globalStatusService.setLoading(true);
+    //el siguiente método demora la carga de la página para simular una carga real, sus parametros seran numeros
+    await new Promise(resolve => setTimeout(resolve, 500));
     const data = await this.apiService.getRestaurants();
     this.restaurants = data;
     this.globalStatusService.setLoading(false);
+  }
+
+  isLoading(): boolean {
+    return this.globalStatusService.isLoading();
   }
 
   selectRow(rowId: number) {
@@ -60,18 +66,29 @@ export class Restaurant {
   }
 
   onDelete() {
-    if (this.selectedRow) {
-      // lógica para eliminar
+    if (this.selectedRow === null) {
+      alert('Seleccioná un restaurante primero.');
+      return;
+    }
+    const selectedRestaurant = this.restaurants[this.selectedRow];
+    if (confirm(`¿Estás seguro de que querés eliminar el restaurante ${selectedRestaurant.name} (ID: ${selectedRestaurant.id})?`)) {
+      this.apiService.deleteRestaurant(selectedRestaurant.id).then(() => {
+        alert('Restaurante eliminado correctamente.');
+        this.restaurants.splice(this.selectedRow!, 1);
+        this.selectedRow = null;
+      })
     }
   }
 
   onView() {
-    if (this.selectedRow) {
-      // lógica para ver
+    if (this.selectedRow === null) {
+      alert('Seleccioná un restaurante primero.');
+      return;
     }
+    alert('Acá iría la vista del restaurante con sus menús y platos.');
   }
 
   onNext() {
-    this.router.navigate(['/menu']);
+    alert('Acá iría la paginación para ver más restaurantes.');
   }
 }

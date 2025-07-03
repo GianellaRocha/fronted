@@ -15,7 +15,6 @@ h1 {
     color: #333;
 }
 
-/* Tabla */
 table {
     border-collapse: collapse;
     width: 90%;
@@ -33,6 +32,8 @@ td {
     text-align: center;
     border-bottom: 1px solid #ddd;
     font-size: 1rem;
+    height: 90px;
+    vertical-align: middle;
 }
 
 thead th {

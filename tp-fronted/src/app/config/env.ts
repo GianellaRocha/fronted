@@ -6,6 +6,8 @@ export const config = {
     editRestaurantById: (id: number) => `/restaurant/edit/${id}`,
     getRestaurantById: (id: number) => `/restaurant/${id}`,
     createRestaurant: '/restaurant',
+    deleteRestaurant: (id: number) => `/restaurant/${id}`,
+    refreshToken: '/refresh-token',
   },
 };
 //configurar las urls

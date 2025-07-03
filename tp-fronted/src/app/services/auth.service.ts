@@ -37,15 +37,17 @@ export class AuthService {
     return this.http.post(`${this.loginURL}/login`, credentials).pipe(
       tap((response: any) => {
         const token = response.accessToken;
+        const refreshToken = response.refreshToken;
         if (token) {
           localStorage.setItem('access_token', token);
+          localStorage.setItem('refresh_token', refreshToken);
           this.loggedIn.next(true); // Actualiza el BehaviorSubject
         }
       })
     );
   }
 
- register(credentials: { email: string; password: string }): Observable<RegisterResponse> {
+  register(credentials: { email: string; password: string }): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${this.loginURL}/register`, credentials).pipe(
       tap((response) => {
         if (response.access_token) {
@@ -57,6 +59,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
     this.loggedIn.next(false); // Actualiza el BehaviorSubject a false
     this.router.navigate(['/login']);
   }
@@ -66,10 +69,10 @@ export class AuthService {
   }
   //para autenticar si el usuario tine un token
 
-  
-isAuthenticated(): boolean {
-  return !!localStorage.getItem('access_token');
-}
+
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('access_token');
+  }
 
   // Este método isLoggedIn() está duplicado y generaba el error.
   // Lo he renombrado arriba a getIsLoggedInObservable() para el BehaviorSubject

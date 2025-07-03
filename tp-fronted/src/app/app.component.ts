@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { TokenTimeoutService } from './services/tokenTimeout.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,11 @@ import { RouterOutlet } from '@angular/router';
 })
 
 export class AppComponent {
+  constructor(private tokenTimeoutService: TokenTimeoutService) {}
   title = 'pedidos-ya';
+
+  @HostListener('document:mousemove')
+  resetOnActivity() {
+    this.tokenTimeoutService.resetCountdown();
+  }
 }
