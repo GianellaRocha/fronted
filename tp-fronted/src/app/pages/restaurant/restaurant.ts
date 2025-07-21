@@ -30,6 +30,7 @@ export class Restaurant {
   }> = [];
 
   selectedRow: number | null = null;
+  actualPage: number = 1;
 
   ngOnInit(): void {
     this.initialization();
@@ -37,9 +38,14 @@ export class Restaurant {
 
   async initialization(): Promise<void> {
     this.globalStatusService.setLoading(true);
-    //el siguiente método demora la carga de la página para simular una carga real, sus parametros seran numeros
     await new Promise(resolve => setTimeout(resolve, 500));
-    const data = await this.apiService.getRestaurants();
+    const data = await this.apiService.getRestaurants(this.actualPage);
+    if (data.length === 0) {
+      alert('No hay restaurantes para mostrar.');
+      this.globalStatusService.setLoading(false);
+      this.actualPage --;
+      return;
+    }
     this.restaurants = data;
     this.globalStatusService.setLoading(false);
   }
@@ -89,6 +95,14 @@ export class Restaurant {
   }
 
   onNext() {
-    alert('Acá iría la paginación para ver más restaurantes.');
+    this.actualPage++;
+    this.selectedRow = null;
+    this.initialization();
+  }
+
+  onPrevious() {
+    this.actualPage--;
+    this.selectedRow = null;
+    this.initialization();
   }
 }

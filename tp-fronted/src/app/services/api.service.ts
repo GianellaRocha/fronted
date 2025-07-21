@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import axiosService from '../api/axiosClient';
+import { axiosService}  from './axiosClient';
 import { config } from '../config/env';
 import { EditRestaurantInput, EditRestaurantOutput } from 'app/pages/edit-restaurant/edit-restaurant.dto';
-import { AuthService } from './auth.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ApiService {
-    constructor(private authService: AuthService) { }
+    constructor() { }
 
     async getData(): Promise<
         Array<{ name: string; description: string; image: string }>
@@ -16,7 +15,7 @@ export class ApiService {
         return (await axiosService.get(config.urls.getFood)).data;
     }
 
-    async getRestaurants(): Promise<
+    async getRestaurants(page: number): Promise<
         Array<{
             id: number;
             name: string;
@@ -28,7 +27,9 @@ export class ApiService {
             imageUrl: string;
         }>
     > {
-        const datos = (await axiosService.get(config.urls.getRestaurants)).data;
+        const datos = (await axiosService.get(config.urls.getRestaurants, {
+            params: { page }
+        })).data;
         const respuesta = datos.map(
             (item: {
                 id: any;

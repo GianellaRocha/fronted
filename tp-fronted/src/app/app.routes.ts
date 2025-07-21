@@ -1,48 +1,43 @@
 import { Routes } from '@angular/router';
-import { TemplateComponent } from './pages/template/template.component';
 import { HomeComponent } from './pages/home/home.component';
 import { canActivateFn } from './guard/auth.guard';
 import { Restaurant } from './pages/restaurant/restaurant';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register';
+import { NewComponent } from './pages/new-restaurant/new-restaurant';
+import { EditComponent } from './pages/edit-restaurant/edit-restaurant';
 
 export const routes: Routes = [
     {
         path: '',
-        component: TemplateComponent,
-        children: [
-            {
-                path: '',
-                component: Restaurant,
-                canActivate: [canActivateFn], // Protege la ruta raíz
-            },
-        ],
+        component: Restaurant,
+        canActivate: [canActivateFn],
     },
     {
-        path: 'gome',
-        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
+        path: 'home',
+        component: HomeComponent,
     },
     {
         path: 'login',
-        loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent)
+        component: LoginComponent,
     },
     {
         path: 'register',
-        loadComponent: () => import('./pages/register/register').then(m => m.RegisterComponent)
+        component: RegisterComponent,
     },
     {
         path: 'restaurant',
-        loadComponent: () => import('./pages/restaurant/restaurant').then(m => m.Restaurant),
+        component: Restaurant,
         canActivate: [canActivateFn]
     },
     {
         path: 'restaurant/new',
-        loadComponent: () => import('./pages/new-restaurant/new-restaurant').then(m => m.NewComponent),
+        component: NewComponent,
         canActivate: [canActivateFn]
     },
     {
         path: 'restaurant/edit/:id',
-        loadComponent: () => import('./pages/edit-restaurant/edit-restaurant').then(m => m.EditComponent),
+        component: EditComponent,
         canActivate: [canActivateFn]
     }
 ];
-//definir rutas de la aplicacion
-//los q se van a renderizan en el router outlet

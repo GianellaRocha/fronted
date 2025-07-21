@@ -34,6 +34,9 @@
   </table>
 
   <div class="button-group">
+    @if(actualPage > 1) {
+      <button (click)="onPrevious()">Previous</button>
+    }
     <button (click)="onNew()">New</button>
     <button (click)="onEdit()">Edit</button>
     <button (click)="onDelete()">Delete</button>
