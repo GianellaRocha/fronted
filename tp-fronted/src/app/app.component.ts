@@ -12,9 +12,4 @@ import { TokenTimeoutService } from './services/tokenTimeout.service';
 export class AppComponent {
   constructor(private tokenTimeoutService: TokenTimeoutService) {}
   title = 'pedidos-ya';
-
-  @HostListener('document:mousemove')
-  resetOnActivity() {
-    this.tokenTimeoutService.resetCountdown();
-  }
 }

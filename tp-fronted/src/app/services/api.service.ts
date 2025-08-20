@@ -140,20 +140,4 @@ export class ApiService {
     async deleteRestaurant(id: number): Promise<void> {
         await axiosService.delete(`${config.urls.getRestaurantById(id)}`);
     }
-
-    async refreshToken(): Promise<void> {
-        const response = await axiosService.get('http://localhost:3000/refresh-token');
-
-        // Accedés a los tokens
-        const { accessToken, refreshToken } = response.data;
-
-        if (accessToken) {
-            localStorage.setItem('access_token', accessToken);
-        }
-
-        if (refreshToken) {
-            localStorage.setItem('refresh_token', refreshToken);
-        }
-
-    }
 }

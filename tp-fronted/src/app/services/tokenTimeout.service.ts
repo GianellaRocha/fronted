@@ -6,7 +6,7 @@ import { AuthService } from "./auth.service";
 export class TokenTimeoutService {
     private timeoutRef!: ReturnType<typeof setTimeout>;
     private timeoutMs = 15 * 60 * 1000; // 15 minutos, duracion del token
-    constructor(private apiService: ApiService, private authService: AuthService) { }
+    constructor(private authService: AuthService) { }
 
     startCountdown() {
         this.clear(); // por si ya estaba corriendo
@@ -31,7 +31,7 @@ export class TokenTimeoutService {
     }
 
     async refreshToken() {
-        await this.apiService.refreshToken();
+        await this.authService.refreshToken();
     }
 
     private logout() {

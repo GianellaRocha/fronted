@@ -38,7 +38,7 @@ export class Restaurant {
 
   async initialization(): Promise<void> {
     this.globalStatusService.setLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise(resolve => setTimeout(resolve, 500)); //Decorativo
     const data = await this.apiService.getRestaurants(this.actualPage);
     if (data.length === 0) {
       alert('No hay restaurantes para mostrar.');

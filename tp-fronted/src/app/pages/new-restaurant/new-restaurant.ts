@@ -22,9 +22,9 @@ export class NewComponent {
     constructor(private fb: FormBuilder, private apiService: ApiService, private router: Router) {
         this.formulario = this.fb.group({
             name: ['', [Validators.required, Validators.minLength(6)]],
-            street: ['', Validators.required, Validators.minLength(6)],
-            number: [null, [Validators.required, Validators.min(1)], Validators.max(3)],
-            cityId: [null, Validators.required, Validators.min(1)],
+            street: ['', [Validators.required, Validators.minLength(6)]],
+            number: [null, [Validators.required, Validators.min(1)]],
+            cityId: [null, [Validators.required, Validators.min(1)]],
             lat: [null, [Validators.required, Validators.min(-90), Validators.max(90)]],
             long: [null, [Validators.required, Validators.min(-180), Validators.max(180)]],
             imageUrl: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+\.(jpg|jpeg|png|gif)(\?.*)?$/i)]]

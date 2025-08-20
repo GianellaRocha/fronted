@@ -8,12 +8,12 @@ import { axiosAuthService } from './axiosClient';
 import { config } from 'app/config/env';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   private hasToken(): boolean {
     return !!localStorage.getItem('access_token');
@@ -28,9 +28,11 @@ export class AuthService {
   }
 
   async login(credentials: { email: string; password: string }): Promise<any> {
-    const respuesta = (await axiosAuthService.post(config.urls.login, credentials)).data;
-    const token = respuesta.access_token;
-    const refreshToken = respuesta.refresh_token;
+    const respuesta = (
+      await axiosAuthService.post(config.urls.login, credentials)
+    ).data;
+    const token = respuesta.accessToken;
+    const refreshToken = respuesta.refreshToken;
     if (token) {
       localStorage.setItem('access_token', token);
       localStorage.setItem('refresh_token', refreshToken);
@@ -39,8 +41,13 @@ export class AuthService {
     return respuesta;
   }
 
-  async register(credentials: { email: string; password: string }): Promise<any> {
-    const respuesta = (await axiosAuthService.post(config.urls.register, credentials)).data;
+  async register(credentials: {
+    email: string;
+    password: string;
+  }): Promise<any> {
+    const respuesta = (
+      await axiosAuthService.post(config.urls.register, credentials)
+    ).data;
     const token = respuesta.access_token;
     const refreshToken = respuesta.refresh_token;
     if (token) {
@@ -60,5 +67,19 @@ export class AuthService {
 
   getToken(): string | null {
     return localStorage.getItem('access_token');
+  }
+
+  async refreshToken(): Promise<void> {
+    const response = await axiosAuthService.get(config.urls.refreshToken);
+
+    const { accessToken, refreshToken } = response.data;
+
+    if (accessToken) {
+      localStorage.setItem('access_token', accessToken);
+    }
+
+    if (refreshToken) {
+      localStorage.setItem('refresh_token', refreshToken);
+    }
   }
 }
